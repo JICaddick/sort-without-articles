@@ -49,6 +49,15 @@
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
 
+function strip(bandName) {
+    // the regex below: ^ means starts with and the /i means case insensitive.After the 'i' flag we replace the article with..... nothing. .trim() removes the article from the beginning of the string
+    return bandName.replace(/^(a |the |an )/i, '').trim();
+}
+const sortedBands = bands.sort((a,b) => (strip(a) > strip(b)) ? 1 : -1);
+// when you try to set something to innerHTML that isn't a string, it will be converted to a string and divide the elements with commas. So we can use the join method to join the array into a string with a comma between each item.
+// innerHTML is a property that allows you to set the HTML content of an element. It is a property of the Element interface. It is a DOMString that represents the HTML or XML markup contained within the element.
+document.querySelector('#bands').innerHTML = sortedBands.map(band => `<li>${band}</li>`).join('');
+
 </script>
 
 </body>
